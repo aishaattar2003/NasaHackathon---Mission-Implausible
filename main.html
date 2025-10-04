@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flares, Auroras & Me - Interactive NASA Storybook</title>
+
+  <!-- jQuery (MUST come before Turn.js) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Turn.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #1a237e 0%, #0d0221 80%);
+      background-image: url('https://cdn.pixabay.com/photo/2013/07/13/10/44/space-157029_1280.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: "Poppins", sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .book-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 2000px;
+    }
+
+    /* Landscape Flipbook */
+    #flipbook {
+      width: 1200px;     /* total book width (spread) */
+      height: 700px;     /* shorter height */
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      background: #eee;
+      transform-style: preserve-3d;
+      will-change: transform;
+      overflow: hidden;
+    }
+
+    #flipbook .page {
+      background-color: #fff;
+      overflow: hidden;
+      position: relative;
+      border-radius: 10px;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+
+    #flipbook .page img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;  /* makes it fill without stretching */
+      display: block;
+    }
+
+    /* Arrows */
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid white;
+      border-radius: 50%;
+      color: white;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 26px;
+      z-index: 10;
+      transition: 0.3s;
+      user-select: none;
+    }
+
+    .nav-arrow:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .arrow-left { left: 3vw; }
+    .arrow-right { right: 3vw; }
+
+    /* Responsive scaling */
+    @media (max-width: 1300px) {
+      #flipbook {
+        width: 85vw;
+        height: calc(85vw * 0.58); /* maintain 1200:700 ratio */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="book-container">
+    <div class="nav-arrow arrow-left" id="prevPage">‹</div>
+
+    <div id="flipbook">
+      <div class="page"><img src="pages/page1.jpg" alt="Page 1"></div>
+      <div class="page"><img src="pages/page2.jpg" alt="Page 2"></div>
+      <div class="page"><img src="pages/page3.jpg" alt="Page 3"></div>
+      <div class="page"><img src="pages/page4.jpg" alt="Page 4"></div>
+      <div class="page"><img src="pages/page5.jpg" alt="Page 5"></div>
+    </div>
+
+    <div class="nav-arrow arrow-right" id="nextPage">›</div>
+  </div>
+
+  <script>
+    $(function () {
+      const flipbook = $("#flipbook");
+
+      flipbook.turn({
+        width: 1200,
+        height: 700,
+        autoCenter: true,
+        duration: 1500,
+        gradients: true,
+        elevation: 50
+      });
+
+      $("#nextPage").on("click", () => flipbook.turn("next"));
+      $("#prevPage").on("click", () => flipbook.turn("previous"));
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") flipbook.turn("next");
+        if (e.key === "ArrowLeft") flipbook.turn("previous");
+      });
+    });
+  </script>
+</body>
+</html>
+
+
