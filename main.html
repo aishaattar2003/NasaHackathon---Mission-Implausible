@@ -35,16 +35,22 @@
       perspective: 2000px;
     }
 
-    /* Landscape Flipbook */
     #flipbook {
-      width: 1200px;     /* total book width (spread) */
-      height: 700px;     /* shorter height */
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
+      width: 1200px;
+      height: 700px;
       border-radius: 12px;
       background: #eee;
       transform-style: preserve-3d;
       will-change: transform;
       overflow: hidden;
+      transition: box-shadow 0.3s ease;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Hide outer shadows dynamically */
+    #flipbook.start,
+    #flipbook.end {
+      box-shadow: none !important;
     }
 
     #flipbook .page {
@@ -52,33 +58,28 @@
       overflow: hidden;
       position: relative;
       border-radius: 10px;
-      -webkit-transform: translateZ(0);
-      transform: translateZ(0);
     }
 
     #flipbook .page img {
       width: 100%;
       height: 100%;
-      object-fit: cover;  /* makes it fill without stretching */
+      object-fit: cover;
       display: block;
     }
 
-    /* Arrows */
+    /* Navigation Arrows */
     .nav-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.2);
-      border: 2px solid white;
-      border-radius: 50%;
-      color: white;
+      color: rgb(72, 72, 72);
       width: 50px;
       height: 50px;
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      font-size: 26px;
+      font-size: 100px;
       z-index: 10;
       transition: 0.3s;
       user-select: none;
@@ -96,8 +97,12 @@
     @media (max-width: 1300px) {
       #flipbook {
         width: 85vw;
-        height: calc(85vw * 0.58); /* maintain 1200:700 ratio */
+        height: calc(85vw * 0.58); /* maintain 1200x700 ratio */
       }
+    }
+
+    #flipbook .page.turned {
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
     }
   </style>
 </head>
@@ -121,18 +126,47 @@
     $(function () {
       const flipbook = $("#flipbook");
 
+      // Initialize Turn.js
       flipbook.turn({
         width: 1200,
         height: 700,
         autoCenter: true,
         duration: 1500,
         gradients: true,
-        elevation: 50
+        elevation: 50,
+        when: {
+          turning: function (event, page) {
+            const total = flipbook.turn("pages");
+            flipbook.removeClass("start end");
+
+            // Add "start" class at the beginning
+            if (page === 1) {
+              flipbook.addClass("start");
+            }
+            // Add "end" class at the last page
+            else if (page === total) {
+              flipbook.addClass("end");
+            }
+          },
+          turned: function (event, page) {
+            const total = flipbook.turn("pages");
+
+            // Also check after turning (for smoother look)
+            flipbook.removeClass("start end");
+            if (page === 1) flipbook.addClass("start");
+            if (page === total) flipbook.addClass("end");
+          }
+        }
       });
 
+      // Start clean (hide shadow at beginning)
+      flipbook.addClass("start");
+
+      // Navigation buttons
       $("#nextPage").on("click", () => flipbook.turn("next"));
       $("#prevPage").on("click", () => flipbook.turn("previous"));
 
+      // Keyboard controls
       document.addEventListener("keydown", (e) => {
         if (e.key === "ArrowRight") flipbook.turn("next");
         if (e.key === "ArrowLeft") flipbook.turn("previous");
@@ -141,5 +175,3 @@
   </script>
 </body>
 </html>
-
-
