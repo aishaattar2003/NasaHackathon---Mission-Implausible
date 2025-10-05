@@ -20,7 +20,7 @@ Our goal with this project is to:
 - Educate students about solar phenomena in an easy and fun way.
 - Inspire curiosity about space science through visuals, animations, and storytelling.
 
-###Software and Tools used:
+### Software and Tools used:
 - canva for designing animated scenes, illustrations, and data visualizations.
 - HTML, CSS, and JavaScript  to structure and style our digital book.
 - Turn.js – a JavaScript library that creates a realistic flipbook effect, allowing readers to “turn pages” and interact with the story like a real book
