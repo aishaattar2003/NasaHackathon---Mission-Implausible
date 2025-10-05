@@ -15,7 +15,7 @@
     body {
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle at center, #1a237e 0%, #0d0221 80%);
+      background: radial-gradient(circle at center, #ffffff 0%, #0d0221 80%);
       background-image: url('https://cdn.pixabay.com/photo/2013/07/13/10/44/space-157029_1280.png');
       background-size: cover;
       background-repeat: no-repeat;
@@ -104,6 +104,64 @@
     #flipbook .page.turned {
       box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
     }
+
+    /* ===== QUIZ PAGE STYLES ===== */
+    .quiz-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffffff;
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .quiz-content {
+      max-width: 80%;
+    }
+
+    .quiz-content h2 {
+      font-size: 28px;
+      margin-bottom: 25px;
+      color: #ffea00;
+      text-shadow: 0 0 10px rgba(255, 234, 0, 0.6);
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .option {
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 2px solid #ffea00;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .option:hover {
+      background: #ffea00;
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    /* Feedback message */
+    .feedback {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #ffea00;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .feedback.show {
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -114,9 +172,23 @@
     <div id="flipbook">
       <div class="page"><img src="pages/page1.mp4" alt="Page 1"></div>
       <div class="page"><img src="pages/page2.jpg" alt="Page 2"></div>
-      <div class="page"><img src="pages/page3.jpg" alt="Page 3"></div>
-      <div class="page"><img src="pages/page4.jpg" alt="Page 4"></div>
-      <div class="page"><img src="pages/page5.jpg" alt="Page 5"></div>
+      <div class="page"><img src="pages/page3.mp4" alt="Page 3"></div>
+      <div class="page"><img src="pages/page4.mp4" alt="Page 4"></div>
+      <div class="page"><img src="pages/page5.mp4" alt="Page 5"></div>
+
+      <!-- PAGE 6: QUIZ PAGE -->
+      <div class="page quiz-page">
+        <div class="quiz-content">
+          <h2>Which planet is closest to the Sun?</h2>
+          <div class="options">
+            <button class="option" data-correct="false">Earth</button>
+            <button class="option" data-correct="false">Venus</button>
+            <button class="option" data-correct="true">Mercury</button>
+            <button class="option" data-correct="false">Mars</button>
+          </div>
+          <div class="feedback" id="feedback"></div>
+        </div>
+      </div>
     </div>
 
     <div class="nav-arrow arrow-right" id="nextPage">›</div>
@@ -138,20 +210,11 @@
           turning: function (event, page) {
             const total = flipbook.turn("pages");
             flipbook.removeClass("start end");
-
-            // Add "start" class at the beginning
-            if (page === 1) {
-              flipbook.addClass("start");
-            }
-            // Add "end" class at the last page
-            else if (page === total) {
-              flipbook.addClass("end");
-            }
+            if (page === 1) flipbook.addClass("start");
+            else if (page === total) flipbook.addClass("end");
           },
           turned: function (event, page) {
             const total = flipbook.turn("pages");
-
-            // Also check after turning (for smoother look)
             flipbook.removeClass("start end");
             if (page === 1) flipbook.addClass("start");
             if (page === total) flipbook.addClass("end");
@@ -159,7 +222,6 @@
         }
       });
 
-      // Start clean (hide shadow at beginning)
       flipbook.addClass("start");
 
       // Navigation buttons
@@ -170,6 +232,26 @@
       document.addEventListener("keydown", (e) => {
         if (e.key === "ArrowRight") flipbook.turn("next");
         if (e.key === "ArrowLeft") flipbook.turn("previous");
+      });
+
+      // 🎯 QUIZ LOGIC
+      $(document).on("click", ".option", function () {
+        const isCorrect = $(this).data("correct");
+        const feedback = $("#feedback");
+
+        if (isCorrect) {
+          feedback.text("✅ Correct! Flipping to next page...").addClass("show");
+          setTimeout(() => {
+            feedback.removeClass("show");
+            flipbook.turn("next");
+          }, 1000);
+        } else {
+          feedback.text("❌ Try again! Going back...").addClass("show");
+          setTimeout(() => {
+            feedback.removeClass("show");
+            flipbook.turn("previous");
+          }, 1000);
+        }
       });
     });
   </script>
