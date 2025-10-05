@@ -170,8 +170,9 @@
   box-shadow: 0 5px 0 #cc7a00;
 }
 
+
 .option:hover {
-  background: linear-gradient(135deg, #ffda3a, #ffaa00);
+  background: transparent;
   color: #333;
   transform: scale(1.1);
   box-shadow: 0 7px 0 transparent;
@@ -199,35 +200,43 @@
     <div class="nav-arrow arrow-left" id="prevPage">‹</div>
 
    <div id="flipbook">
+
   <div class="page">
     <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
       <source src="pages/cover_page.mp4" type="video/mp4">
     </video>
   </div>
-  <div class="page"><img src="pages/trial_page2.png" alt="Page 2"></div>
+
+  <div class="page"><img src="pages/page2.png" alt="Page 2"></div>
+
   <div class="page">
     <video autoplay muted loop playsinline style="width:100%px; height:100%px; object-fit:cover;">
-      <source src="pages/trial_page3.mp4" type="video/mp4">
+      <source src="pages/page3.mp4" type="video/mp4">
     </video>
   </div>
+
   <div class="page">
     <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
       <source src="pages/page4.mp4" type="video/mp4">
     </video>
   </div>
+
   <div class="page">
     <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
       <source src="pages/page5.mp4" type="video/mp4">
     </video>
   </div>
-  <div class="page"><img src="pages/trial_page6.png" alt="Page 6"></div>
-  <div class="page"><img src="pages/trial_page7.png" alt="Page 7"></div>
+
+  <div class="page"><img src="pages/page6.png" alt="Page 6"></div>
+
+  <div class="page"><img src="pages/page7.png" alt="Page 7"></div>
+
   <div class="page"><img src="pages/page8.png" alt="Page 8"></div>
- <!-- PAGE 9 WITH QUIZ OVERLAY -->
-  <div class="page quiz-page">
-    <img src="pages/page9.png" alt="Page 9">
-  
-    <!-- Overlay quiz content -->
+
+
+  <div class="page quiz-page"><img src="pages/page9.png" alt="Page 9">
+
+      <!-- Quiz content -->
     <div class="quiz-overlay">
       <div class="quiz-content">
         <div class="options">
@@ -241,111 +250,143 @@
     </div>
   </div>
 
-  page 10
+
   <div class="page">
       <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
         <source src="pages/page10.mp4" type="video/mp4">
       </video>
     </div>
 
-  page 11
+  
   <div class="page">
     <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
       <source src="pages/page11.mp4" type="video/mp4">
     </video>
   </div>
 
-  page 12
+  
   <div class="page">
     <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
       <source src="pages/page12.mp4" type="video/mp4">
     </video>
   </div>
 
-  page 13
+
   <div class="page">
     <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
       <source src="pages/page13.mp4" type="video/mp4">
     </video>
     </div>
 
-    Page 14
+    
     <div class="page quiz-page"><img src="pages/page14.png" alt="Page 14">
     </div>
 
-    page 15
+  
     <div class="page quiz-page"><img src="pages/page15.png" alt="Page 15">
-    </div>
 
-    page 16
+        <!-- Quiz content -->
+    <div class="quiz-overlay">
+      <div class="quiz-content">
+        <div class="options">''
+          <button class="option" data-correct="false">Atmosphere</button>
+          <button class="option" data-correct="true">Ionosphere</button>
+          <button class="option" data-correct="false">Stratosphere</button>
+          <button class="option" data-correct="false">Magnetosphere</button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+      </div>
+    </div>
+  </div>
+
+ 
     <div class="page">
       <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
         <source src="pages/page16.mp4" type="video/mp4">
       </video>
     </div>
 
-    page 17
+
     <div class="page">
       <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
         <source src="pages/page17.mp4" type="video/mp4">
       </video>
     </div>
 
-    page 18
+
     <div class="page quiz-page"><img src="pages/page18.png" alt="Page 18">
     </div>
 
-    page 19
-    <div class="page quiz-page"><img src="pages/page19.png" alt="Page 19">
-    </div>
 
-    page 20
+    <div class="page quiz-page"><img src="pages/page19.png" alt="Page 19">
+
+      <!-- Quiz content -->
+    <div class="quiz-overlay">
+      <div class="quiz-content">
+        <div class="options">
+          <button class="option" data-correct="false">Infrared </button>
+          <button class="option" data-correct="false">Gamma rays</button>
+          <button class="option" data-correct="false">Radio waves</button>
+          <button class="option" data-correct="true">Microwaves</button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+      </div>
+    </div>
+  </div>
+
+
     <div class="page">
       <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
         <source src="pages/page20.mp4" type="video/mp4">
       </video>
     </div>
 
-    page 21
     <div class="page">
       <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
         <source src="pages/page21.mp4" type="video/mp4">
       </video>
     </div>
 
-    page 22
     <div class="page">
       <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
         <source src="pages/page22.mp4" type="video/mp4">
       </video>
     </div>
 
-    page 23
-      <div class="page">
+    <div class="page">
       <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
         <source src="pages/page23.mp4" type="video/mp4">
       </video>
     </div>
     
-    page 24
-      <div class="page">
+    <div class="page">
       <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
         <source src="pages/page24.mp4" type="video/mp4">
       </video>
     </div>
 
-    page 25
-      <div class="page">
+    <div class="page">
       <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
         <source src="pages/page25.mp4" type="video/mp4">
       </video>
-    </div>
-    
 
+      <!-- Quiz content -->
+    <div class="quiz-overlay">
+      <div class="quiz-content">
+        <div class="options">
+          <button class="option" data-correct="false">Solar rays</button>
+          <button class="option" data-correct="false">Solar flares </button>
+          <button class="option" data-correct="true">Solar storms</button>
+          <button class="option" data-correct="false">Solar waves</button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+      </div>
+    </div>
+  </div>
 
 </div>
 
-    <div class="nav-arrow arrow-right" id="nextPage">›</div>
+<div class="nav-arrow arrow-right" id="nextPage">›</div>
   </div>
 </div>
 
