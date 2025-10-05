@@ -23,6 +23,7 @@
       font-family: "Poppins", sans-serif;
       color: white;
       overflow: hidden;
+      transform: translateY(100px); /* pushes the whole flipbook down */
     }
 
     .book-container {
@@ -146,36 +147,39 @@
   font-family: "Comic Sans MS", "Poppins", sans-serif;
   font-size: 30px;
   margin-bottom: 25px;
-  text-shadow: 0 0 6px rgba(255, 200, 0, 0.7);
+  text-shadow: 0 0 6px rgba(255, 200, 0, 0);
 }
 
-/* Option buttons (cartoony look) */
+/* Option buttons */
 .options {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+  display: flex;
+  flex-wrap: wrap;            /* allows wrapping into 2 rows */
+  justify-content: center;    /* center horizontally */
+  align-items: center;        /* align vertically */
+  gap: 15px 40px;             /* equal vertical + horizontal spacing */
+  text-align: center;
 }
 
 .option {
-  background: #D58A94;
+  min-width: 180px;           /* consistent width */
+  max-width: 220px;
+  text-align: center;
+  background: transparent;
   border: 3px solid #fff;
   color: #fff;
   font-family: "Comic Sans MS", "Poppins", sans-serif;
   font-size: 20px;
   font-weight: bold;
-  padding: 15px;
+  padding: 12px 0;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 5px 0 #cc7a00;
 }
 
-
 .option:hover {
-  background: transparent;
-  color: #333;
-  transform: scale(1.1);
-  box-shadow: 0 7px 0 transparent;
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+  color: #fff;
 }
 
 /* Feedback text */
@@ -195,6 +199,24 @@
   </style>
 </head>
 
+</div>
+<audio id="backgroundAudio" loop>
+  <source src="pages/book-audio.mp3" type="audio/mp3">
+</audio>
+
+<script>
+  let audioStarted = false;
+
+  document.getElementById("nextPage").addEventListener("click", () => {
+    const audio = document.getElementById("backgroundAudio");
+    if (!audioStarted) {
+      audio.volume = 0.6;
+      audio.play();
+      audioStarted = true;
+    }
+  });
+</script>
+
 <body>
   <div class="book-container">
     <div class="nav-arrow arrow-left" id="prevPage">‹</div>
@@ -210,7 +232,7 @@
   <div class="page"><img src="pages/page2.png" alt="Page 2"></div>
 
   <div class="page">
-    <video autoplay muted loop playsinline style="width:100%px; height:100%px; object-fit:cover;">
+    <video autoplay muted loop playsinline style="width:100%px; height:100%; object-fit:cover;">
       <source src="pages/page3.mp4" type="video/mp4">
     </video>
   </div>
@@ -382,6 +404,12 @@
         <div class="feedback" id="feedback"></div>
       </div>
     </div>
+  </div>
+
+  <div class="page">
+    <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
+      <source src="pages/page26.mp4" type="video/mp4">
+    </video>
   </div>
 
 </div>
