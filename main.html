@@ -23,7 +23,7 @@
       font-family: "Poppins", sans-serif;
       color: white;
       overflow: hidden;
-      transform: translateY(100px); /* pushes the whole flipbook down */
+      transform: translateY(100px);
     }
 
     .book-container {
@@ -48,7 +48,6 @@
       box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
     }
 
-    /* Hide outer shadows dynamically */
     #flipbook.start,
     #flipbook.end {
       box-shadow: none !important;
@@ -94,11 +93,10 @@
     .arrow-left { left: 3vw; }
     .arrow-right { right: 3vw; }
 
-    /* Responsive scaling */
     @media (max-width: 1300px) {
       #flipbook {
         width: 85vw;
-        height: calc(85vw * 0.58); /* maintain 1200x700 ratio */
+        height: calc(85vw * 0.58);
       }
     }
 
@@ -106,325 +104,142 @@
       box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
     }
 
-/* === QUIZ PAGE (Kid-Friendly Style) === */
-.quiz-page {
-  position: relative;
-  overflow: hidden;
-}
+    .quiz-page {
+      position: relative;
+      overflow: hidden;
+    }
 
-.quiz-page img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+    .quiz-page img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-/* Overlay to make text readable */
-.quiz-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .quiz-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-/* Quiz content box */
-.quiz-content {
-  background:transparent;
-  padding: 40px;
-  border-radius: 25px;
-  text-align: center;
-  color: #333;
-  max-width: 80%;
-}
+    .quiz-content {
+      background: transparent;
+      padding: 40px;
+      border-radius: 25px;
+      text-align: center;
+      color: #333;
+      max-width: 80%;
+    }
 
-/* Fun header */
-.quiz-content h2 {
-  color: #482d78;
-  font-family: "Comic Sans MS", "Poppins", sans-serif;
-  font-size: 30px;
-  margin-bottom: 25px;
-  text-shadow: 0 0 6px rgba(255, 200, 0, 0);
-}
+    .quiz-content h2 {
+      color: #482d78;
+      font-family: "Comic Sans MS", "Poppins", sans-serif;
+      font-size: 30px;
+      margin-bottom: 25px;
+    }
 
-/* Option buttons */
-.options {
-  display: flex;
-  flex-wrap: wrap;            /* allows wrapping into 2 rows */
-  justify-content: center;    /* center horizontally */
-  align-items: center;        /* align vertically */
-  gap: 15px 40px;             /* equal vertical + horizontal spacing */
-  text-align: center;
-}
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 15px 40px;
+      text-align: center;
+    }
 
-.option {
-  min-width: 180px;           /* consistent width */
-  max-width: 220px;
-  text-align: center;
-  background: transparent;
-  border: 3px solid #fff;
-  color: #fff;
-  font-family: "Comic Sans MS", "Poppins", sans-serif;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 12px 0;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+    .option {
+      min-width: 180px;
+      max-width: 220px;
+      text-align: center;
+      background: transparent;
+      border: 3px solid #fff;
+      color: #fff;
+      font-family: "Comic Sans MS", "Poppins", sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 12px 0;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-.option:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: scale(1.05);
-  color: #fff;
-}
+    .option:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
+      color: #fff;
+    }
 
-/* Feedback text */
-.feedback {
-  margin-top: 20px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #ff7b00;
-  text-shadow: 0 0 6px rgba(255, 200, 0, 0.7);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
+    .feedback {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #ff7b00;
+      text-shadow: 0 0 6px rgba(255, 200, 0, 0.7);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
 
-.feedback.show {
-  opacity: 1;
-}
+    .feedback.show {
+      opacity: 1;
+    }
   </style>
 </head>
 
-</div>
-<audio id="backgroundAudio" loop>
-  <source src="pages/book-audio.mp3" type="audio/mp3">
-</audio>
-
-<script>
-  let audioStarted = false;
-
-  document.getElementById("nextPage").addEventListener("click", () => {
-    const audio = document.getElementById("backgroundAudio");
-    if (!audioStarted) {
-      audio.volume = 0.6;
-      audio.play();
-      audioStarted = true;
-    }
-  });
-</script>
-
 <body>
+  <audio id="backgroundAudio" loop>
+    <source src="pages/book-audio.mp3" type="audio/mp3">
+  </audio>
+
   <div class="book-container">
     <div class="nav-arrow arrow-left" id="prevPage">‹</div>
 
-   <div id="flipbook">
+    <div id="flipbook">
 
-  <div class="page">
-    <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-      <source src="pages/cover_page.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <div class="page"><img src="pages/page2.png" alt="Page 2"></div>
-
-  <div class="page">
-    <video autoplay muted loop playsinline style="width:100%px; height:100%; object-fit:cover;">
-      <source src="pages/page3.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <div class="page">
-    <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-      <source src="pages/page4.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <div class="page">
-    <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-      <source src="pages/page5.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <div class="page"><img src="pages/page6.png" alt="Page 6"></div>
-
-  <div class="page"><img src="pages/page7.png" alt="Page 7"></div>
-
-  <div class="page"><img src="pages/page8.png" alt="Page 8"></div>
-
-
-  <div class="page quiz-page"><img src="pages/page9.png" alt="Page 9">
-
-      <!-- Quiz content -->
-    <div class="quiz-overlay">
-      <div class="quiz-content">
-        <div class="options">
-          <button class="option" data-correct="false">Stars</button>
-          <button class="option" data-correct="false">Meteorshowers</button>
-          <button class="option" data-correct="false">Shooting Stars</button>
-          <button class="option" data-correct="true">Northen Lights</button>
-        </div>
-        <div class="feedback" id="feedback"></div>
+      <div class="page">
+        <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
+          <source src="pages/cover_page.mp4" type="video/mp4">
+        </video>
       </div>
-    </div>
-  </div>
 
+      <div class="page"><img src="pages/page2.png" alt="Page 2"></div>
 
-  <div class="page">
-      <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-        <source src="pages/page10.mp4" type="video/mp4">
-      </video>
-    </div>
-
-  
-  <div class="page">
-    <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-      <source src="pages/page11.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  
-  <div class="page">
-    <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-      <source src="pages/page12.mp4" type="video/mp4">
-    </video>
-  </div>
-
-
-  <div class="page">
-    <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-      <source src="pages/page13.mp4" type="video/mp4">
-    </video>
-    </div>
-
-    
-    <div class="page quiz-page"><img src="pages/page14.png" alt="Page 14">
-    </div>
-
-  
-    <div class="page quiz-page"><img src="pages/page15.png" alt="Page 15">
-
-        <!-- Quiz content -->
-    <div class="quiz-overlay">
-      <div class="quiz-content">
-        <div class="options">''
-          <button class="option" data-correct="false">Atmosphere</button>
-          <button class="option" data-correct="true">Ionosphere</button>
-          <button class="option" data-correct="false">Stratosphere</button>
-          <button class="option" data-correct="false">Magnetosphere</button>
-        </div>
-        <div class="feedback" id="feedback"></div>
+      <div class="page">
+        <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
+          <source src="pages/page3.mp4" type="video/mp4">
+        </video>
       </div>
-    </div>
-  </div>
 
- 
-    <div class="page">
-      <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-        <source src="pages/page16.mp4" type="video/mp4">
-      </video>
-    </div>
-
-
-    <div class="page">
-      <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-        <source src="pages/page17.mp4" type="video/mp4">
-      </video>
-    </div>
-
-
-    <div class="page quiz-page"><img src="pages/page18.png" alt="Page 18">
-    </div>
-
-
-    <div class="page quiz-page"><img src="pages/page19.png" alt="Page 19">
-
-      <!-- Quiz content -->
-    <div class="quiz-overlay">
-      <div class="quiz-content">
-        <div class="options">
-          <button class="option" data-correct="false">Infrared </button>
-          <button class="option" data-correct="false">Gamma rays</button>
-          <button class="option" data-correct="false">Radio waves</button>
-          <button class="option" data-correct="true">Microwaves</button>
+      <!-- Add more pages as needed -->
+      <!-- Example quiz -->
+      <div class="page quiz-page">
+        <img src="pages/page9.png" alt="Page 9">
+        <div class="quiz-overlay">
+          <div class="quiz-content">
+            <div class="options">
+              <button class="option" data-correct="false">Stars</button>
+              <button class="option" data-correct="false">Meteor Showers</button>
+              <button class="option" data-correct="false">Shooting Stars</button>
+              <button class="option" data-correct="true">Northern Lights</button>
+            </div>
+            <div class="feedback" id="feedback"></div>
+          </div>
         </div>
-        <div class="feedback" id="feedback"></div>
       </div>
+
     </div>
+
+    <div class="nav-arrow arrow-right" id="nextPage">›</div>
   </div>
-
-
-    <div class="page">
-      <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-        <source src="pages/page20.mp4" type="video/mp4">
-      </video>
-    </div>
-
-    <div class="page">
-      <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-        <source src="pages/page21.mp4" type="video/mp4">
-      </video>
-    </div>
-
-    <div class="page">
-      <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-        <source src="pages/page22.mp4" type="video/mp4">
-      </video>
-    </div>
-
-    <div class="page">
-      <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-        <source src="pages/page23.mp4" type="video/mp4">
-      </video>
-    </div>
-    
-    <div class="page">
-      <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-        <source src="pages/page24.mp4" type="video/mp4">
-      </video>
-    </div>
-
-    <div class="page">
-      <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-        <source src="pages/page25.mp4" type="video/mp4">
-      </video>
-
-      <!-- Quiz content -->
-    <div class="quiz-overlay">
-      <div class="quiz-content">
-        <div class="options">
-          <button class="option" data-correct="false">Solar rays</button>
-          <button class="option" data-correct="false">Solar flares </button>
-          <button class="option" data-correct="true">Solar storms</button>
-          <button class="option" data-correct="false">Solar waves</button>
-        </div>
-        <div class="feedback" id="feedback"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="page">
-    <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-      <source src="pages/page26.mp4" type="video/mp4">
-    </video>
-  </div>
-
-</div>
-
-<div class="nav-arrow arrow-right" id="nextPage">›</div>
-  </div>
-</div>
-
-
 
   <script>
     $(function () {
       const flipbook = $("#flipbook");
 
-      // Initialize Turn.js
       flipbook.turn({
         width: 1200,
         height: 600,
@@ -450,11 +265,9 @@
 
       flipbook.addClass("start");
 
-      // Navigation buttons
       $("#nextPage").on("click", () => flipbook.turn("next"));
       $("#prevPage").on("click", () => flipbook.turn("previous"));
 
-      // Keyboard controls
       document.addEventListener("keydown", (e) => {
         if (e.key === "ArrowRight") flipbook.turn("next");
         if (e.key === "ArrowLeft") flipbook.turn("previous");
@@ -477,6 +290,21 @@
             feedback.removeClass("show");
             flipbook.turn("previous");
           }, 1000);
+        }
+      });
+    });
+
+    // ✅ Safe audio playback initialization
+    window.addEventListener("DOMContentLoaded", () => {
+      const nextBtn = document.getElementById("nextPage");
+      const audio = document.getElementById("backgroundAudio");
+      let audioStarted = false;
+
+      nextBtn.addEventListener("click", () => {
+        if (!audioStarted) {
+          audio.volume = 0.6;
+          audio.play().catch(err => console.warn("Audio play failed:", err));
+          audioStarted = true;
         }
       });
     });
