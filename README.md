@@ -40,7 +40,7 @@ https://www.who.int/news-room/questions-and-answers/item/radiation-and-health
 - Intisar Warfa
 - Anisa Hashi
 - Aisha Attar
-- Surpita
+- Suprita
 - Sree harshini 
 - Ayesha Mujahid
 
